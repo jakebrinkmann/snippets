@@ -6,3 +6,6 @@ snippet pickle-dump
 snippet pickle-load
     with open('/tmp/data.pickle', 'rb') as f:
         data = pickle.load(f)
+
+snippet env-pdb
+    #!/usr/bin/env poetry run python -m pdb -c continue

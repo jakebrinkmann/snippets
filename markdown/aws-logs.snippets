@@ -4,7 +4,8 @@ snippet logs-list
         --query 'logGroups[].logGroupName'
 
 snippet logs-tag-group
-    aws logs tag-log-group --log-group-name <value> --tags Key=str,Key=str
+    # deprecated!
+    aws logs tag-log-group --log-group-name <value> --tags Key1=V1,Key2=V2
 
 snippet logs-list-select
       LOG_GROUP=$(aws logs describe-log-groups \
@@ -120,3 +121,12 @@ snippet logs-put-JSON
     ]
     EOF
     )
+
+snippet logs-retention
+    aws logs put-retention-policy \
+        --log-group-name my-logs --retention-in-days 5
+
+snippet logs-tag-resource
+    aws logs tag-resource \
+        --resource-arn <value> \
+        --tags <value>
