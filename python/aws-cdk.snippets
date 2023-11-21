@@ -21,32 +21,15 @@ snippet cdk-construct
         def endpoint_name(self) -> str:
             return self.endpoint.attr_endpoint_name if self.deploy_enable else "not_yet_deployed"
 
-snippet cdk-project
-    # https://github.com/aws-samples/aws-cdk-project-structure-python
-    ├── backend
-    │   ├── api
-    │   │   ├── infrastructure.py
-    │   │   └── runtime
-    │   │       ├── lambda_function.py
-    │   │       └── requirements.txt
-    │   ├── component.py
-    │   ├── database
-    │   │   └── infrastructure.py
-    │   └── monitoring
-    │       └── infrastructure.py
-    ├── cdk.json
-    ├── constants.py
-    ├── package-lock.json
-    ├── package.json
-    ├── requirements-dev.txt
-    ├── requirements.txt
-    ├── scripts
-    │   ├── install-deps.sh
-    │   └── run-tests.sh
-    ├── tests
-    │   ├── test_backend_api_infrastructure.py
-    │   └── test_backend_api_runtime_lambda_function.py
-    ├── CONTRIBUTING.md
-    ├── LICENSE
-    ├── README.md
-    └── app.py
+snippet cdk-nag
+    from aws_cdk import (
+        Aspects,
+        Stack,
+    )
+    from constructs import Construct
+    import cdk_nag
+    class S3BucketWithCfnNagConstructStack(Stack):
+        def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
+            super().__init__(scope, construct_id, **kwargs)
+
+            Aspects.of(self).add(cdk_nag.AwsSolutionsChecks())

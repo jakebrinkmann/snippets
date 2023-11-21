@@ -50,3 +50,34 @@ snippet cdk-synk
 snippet cdk-json
     //cdk.json
       "app": "poetry run python3 app.py",
+
+snippet cdk-project
+    # https://github.com/aws-samples/aws-cdk-project-structure-python
+    ├── backend
+    │   ├── api
+    │   │   ├── infrastructure.py
+    │   │   └── runtime
+    │   │       ├── lambda_function.py
+    │   │       └── requirements.txt
+    │   ├── component.py
+    │   ├── database
+    │   │   └── infrastructure.py
+    │   └── monitoring
+    │       └── infrastructure.py
+    ├── cdk.json
+    ├── constants.py
+    ├── package-lock.json
+    ├── package.json
+    ├── requirements-dev.txt
+    ├── requirements.txt
+    ├── scripts
+    │   ├── install-deps.sh
+    │   └── run-tests.sh
+    ├── tests
+    │   ├── test_backend_api_infrastructure.py
+    │   └── test_backend_api_runtime_lambda_function.py
+    ├── CONTRIBUTING.md
+    ├── CHANGELOG
+    ├── LICENSE
+    ├── README.md
+    └── app.py
