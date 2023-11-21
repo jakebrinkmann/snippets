@@ -1,0 +1,52 @@
+
+snippet cdk-stack
+    Tags.of(scope: stack).add(key: 'StackName', value: 'YourStack');
+
+snippet cdk-construct
+    from constructs import Construct
+    class EndpointConstruct(Construct):
+        def __init__(self, scope: Construct, construct_id: str,
+                     project_prefix: str,
+                     role_arn: str,
+                     model_name: str,
+                     model_bucket_key: str,
+                     model_docker_image: str,
+                     instance_count: int,
+                     instance_type: str,
+                     environment: dict,
+                     deploy_enable: bool) -> None:
+            super().__init__(scope, construct_id)
+
+        @property
+        def endpoint_name(self) -> str:
+            return self.endpoint.attr_endpoint_name if self.deploy_enable else "not_yet_deployed"
+
+snippet cdk-project
+    # https://github.com/aws-samples/aws-cdk-project-structure-python
+    ├── backend
+    │   ├── api
+    │   │   ├── infrastructure.py
+    │   │   └── runtime
+    │   │       ├── lambda_function.py
+    │   │       └── requirements.txt
+    │   ├── component.py
+    │   ├── database
+    │   │   └── infrastructure.py
+    │   └── monitoring
+    │       └── infrastructure.py
+    ├── cdk.json
+    ├── constants.py
+    ├── package-lock.json
+    ├── package.json
+    ├── requirements-dev.txt
+    ├── requirements.txt
+    ├── scripts
+    │   ├── install-deps.sh
+    │   └── run-tests.sh
+    ├── tests
+    │   ├── test_backend_api_infrastructure.py
+    │   └── test_backend_api_runtime_lambda_function.py
+    ├── CONTRIBUTING.md
+    ├── LICENSE
+    ├── README.md
+    └── app.py
