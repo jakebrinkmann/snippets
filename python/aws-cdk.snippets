@@ -3,14 +3,16 @@ snippet cdk-stack
     from aws_cdk import Stack
     from constructs import Construct
     class YourCdkStack(Stack):
-        def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
+        def __init__(self, scope: Construct, construct_id: str, cfg: dict, env: Environment, **kwargs) -> None:
             super().__init__(scope, construct_id, **kwargs)
             Tags.of(self).add(key: 'StackName', value: 'YourCdkStack');
+
+            MyConstruct(self, "MyConstruct", cfg=cfg, env=env)
 
 snippet cdk-construct
     from constructs import Construct
     class EndpointConstruct(Construct):
-        def __init__(self, scope: Construct, construct_id: str,
+        def __init__(self, scope: Construct, construct_id: str, cfg: dict, env: Environment,
                      project_prefix: str,
                      role_arn: str,
                      model_name: str,
@@ -18,8 +20,7 @@ snippet cdk-construct
                      model_docker_image: str,
                      instance_count: int,
                      instance_type: str,
-                     environment: dict,
-                     deploy_enable: bool) -> None:
+                     deploy_enable: bool,) -> None:
             super().__init__(scope, construct_id)
 
         @property
@@ -194,3 +195,13 @@ snippet cdk-region
 snippet cdk-account
     stack = Stack.of(self)
     account = stack.account
+
+snippet cdk-config
+    config = app.node.try_get_context(os.environ["RUNTIME_ENVIRONMENT"])
+
+snippet cdk-config-json
+  "dev":   { "name": "dev"   },
+  "test":  { "name": "test"  },
+  "stage": { "name": "stage" },
+  "prod":  { "name": "prod"  }
+

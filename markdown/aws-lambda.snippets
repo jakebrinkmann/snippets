@@ -23,8 +23,8 @@ snippet lambda-mktmp
     FILENAME=$(mktemp --suffix '.zip'); rm $FILENAME
 
 snippet lambda-py-pip
-    poetry export --only ${1} -o lambda_assets/requirements.txt --without-hashes
-    pip install -r requirements.txt --target .
+    poetry export --only ${1} -o requirements.txt --without-hashes
+    pip install -r requirements.txt --target lambda_assets/python
     zip $tmpfile -r ./* &> /dev/null
 
 snippet lambda-config

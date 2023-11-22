@@ -20,6 +20,10 @@ snippet git-sha
     git_sha = subprocess.check_output(["git", "rev-parse", "HEAD"]).decode().strip()
     git_tag = ubprocess.check_output(["git", "describe", "--tags"]).decode().strip()
 
+snippet subproc
+    import subprocess
+    subprocess.run(cmd, cwd="/directory")
+
 snippet #!
 	#!/usr/bin/env python
 snippet imp

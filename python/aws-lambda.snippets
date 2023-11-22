@@ -20,9 +20,6 @@ snippet powertools-layer-arm
 snippet powertools-layer-x86
     !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPythonV2:49
 
-snippet poetry-powertools
-    poetry add "aws-lambda-powertools[all]" --group dev
-
 snippet powertools-init
     sam init --app-template hello-world-powertools-python \
         --name sam-app --package-type Zip --runtime python3.11 --no-tracing
