@@ -218,3 +218,7 @@ snippet abc
         ) -> Dict[str, Any]:
             pass
     class DynamoDBDatabase(DatabaseInterface): pass
+
+snippet __loc
+	__location__ = os.path.realpath(
+	    os.path.join(os.getcwd(), os.path.dirname(__file__)))
