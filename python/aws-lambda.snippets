@@ -106,3 +106,23 @@ snippet appconfig-read
     # note: the configuration's type must be AWS.AppConfig.FeatureFlags
     response = requests.get(f"http://localhost:2772/applications/{application_name}/environments/{environment_name}/configurations/{config_profile_name}?flag={flag_key}")
     config = response.content
+
+snippet lambda-context
+    import pytest, uuid
+    from aws_lambda_powertools.utilities.typing import LambdaContext
+    @pytest.fixture
+    def FakeLambdaContext():
+        class LambdaTestContext(LambdaContext):
+            def __init__(self, name: str, version: int = 1, region: str = "us-east-1", account_id: str = "111122223333"):
+                self._function_name = name
+                self._function_version = str(version)
+                self._memory_limit_in_mb = 128
+                self._invoked_function_arn = f"arn:aws:lambda:{region}:{account_id}:function:{name}:{version}"
+                self._aws_request_id = str(uuid.uuid4())
+                self._log_group_name = f"/aws/lambda/{name}"
+                self._log_stream_name = str(uuid.uuid4())
+
+        def wrapper(name: str = "Test"):
+            return LambdaTestContext(name)
+
+        return wrapper
